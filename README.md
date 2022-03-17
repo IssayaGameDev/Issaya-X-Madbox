@@ -21,9 +21,9 @@ Hope you have fun playing it!
 
 
 PS: For the code search these comments for interesting parts :
-      -Level Manager => main.ts
-      -Level Generation => level.ts
-      -Obstacle Generation => level.ts
-      -Collision Handler => level.ts
-      -Character Controller => gameManager.ts
-      -Camera Controller => gameManager.ts
+      -Level Manager => main.ts<br/>
+      -Level Generation => level.ts<br/>
+      -Obstacle Generation => level.ts<br/>
+      -Collision Handler => level.ts<br/>
+      -Character Controller => gameManager.ts<br/>
+      -Camera Controller => gameManager.ts<br/>
