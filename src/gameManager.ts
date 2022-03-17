@@ -108,16 +108,15 @@ export class GameManager {
 
         window.addEventListener('resize',()=> this.onWindowResize(), false)
 
-/*         window.addEventListener("touchstart", (e) => this.touchStartHandler(e), false);
-        window.addEventListener("touchmove", (e) => this.touchMoveHandler(e), false);
-        window.addEventListener("touchend", (e) => this.touchEndHandler(e), false); */
+         window.addEventListener("touchstart", (e) => this.touchStartHandler(e), false);
+         window.addEventListener("touchmove", (e) => this.touchMoveHandler(e), false);
+        window.addEventListener("touchend", (e) => this.touchEndHandler(e), false); 
         window.addEventListener("mousedown", (e) => this.touchStartHandler(e), false);
         window.addEventListener("mousemove", (e) => this.touchMoveHandler(e), false);
         window.addEventListener("mouseup", (e) => this.touchEndHandler(e), false);
        
         
     }
-
     unlockLevel(){
         this.unlockedLevels +=1;
 
@@ -137,25 +136,40 @@ export class GameManager {
 
     }
 
-    touchStartHandler(e: MouseEvent){
-        
-        this.input.startPosition.x =  e.clientX / window.innerWidth * 2 - 1;
-        this.input.startPosition.y =  (e.clientY / window.innerHeight) * 2 + 1;
+    
+    touchStartHandler(e: MouseEvent | TouchEvent){
         this.input.isPlayerTouch = true;
+        if ('touches' in e) {
+            
+            this.input.startPosition.x =  e.touches[0].clientX / window.innerWidth * 2 - 1;
+            this.input.startPosition.y =  (e.touches[0].clientY / window.innerHeight) * 2 + 1;
+        }
+        else{
+            this.input.startPosition.x =  e.clientX / window.innerWidth * 2 - 1;
+            this.input.startPosition.y =  (e.clientY / window.innerHeight) * 2 + 1;
+        }
+
         
     }
-    touchMoveHandler(e: MouseEvent){
-
-        if(this.input.isPlayerTouch && this.level?.state == 1){
+    touchMoveHandler(e:  MouseEvent | TouchEvent){
+        if ('touches' in e) {
+            this.input.currentPosition.x =  e.touches[0].clientX / window.innerWidth * 2 - 1;
+            this.input.currentPosition.y =  (e.touches[0].clientY / window.innerHeight) * 2 + 1;
+        }
+        else{
             this.input.currentPosition.x = e.clientX / window.innerWidth * 2 - 1;
             this.input.currentPosition.y = (e.clientY / window.innerHeight) * 2 + 1;
+        }
+
+        if(this.input.isPlayerTouch && this.level?.state == 1){
+
             this.input.offset.x  = this.input.currentPosition.x - this.input.startPosition.x
 
             this.level?.player.threeBody?.body.velocity.set(-this.input.offset.x*20,this.level?.player.threeBody?.body.velocity.y,this.level?.player.threeBody?.body.velocity.z);
         }
 
     }
-    touchEndHandler(e: MouseEvent){
+    touchEndHandler(e:  MouseEvent | TouchEvent){
         this.input.isPlayerTouch = false;
 
         if(this.level?.state == 1){

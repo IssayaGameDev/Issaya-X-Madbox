@@ -23,7 +23,7 @@ class Level {
     started: boolean = false;
     //0: paused, 1: playing, 2: gameOver, 3: win
     public state: number = 0;
-    scoreGoal: number = 2;
+    scoreGoal: number = 20;
     
     public constructor( levelId: number=1,levelColor: Color = new Color(0xAB4FAF) ) {
     
