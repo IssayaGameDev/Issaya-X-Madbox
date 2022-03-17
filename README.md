@@ -18,3 +18,12 @@ To take it a step further I think I could add level variety first with different
 Overall I ended up enjoying this assignment and had a lot of fun going through with it.
 
 Hope you have fun playing it!
+
+
+PS: For the code search these comments for interesting parts :
+      -Level Manager => main.ts
+      -Level Generation => level.ts
+      -Obstacle Generation => level.ts
+      -Collision Handler => level.ts
+      -Character Controller => gameManager.ts
+      -Camera Controller => gameManager.ts
