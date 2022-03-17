@@ -20,7 +20,7 @@ Overall I ended up enjoying this assignment and had a lot of fun going through w
 Hope you have fun playing it!
 
 
-PS: For the code search these comments for interesting parts :
+PS: For the code search these comments for interesting parts :<br/>
       -Level Manager => main.ts<br/>
       -Level Generation => level.ts<br/>
       -Obstacle Generation => level.ts<br/>
