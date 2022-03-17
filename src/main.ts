@@ -5,6 +5,9 @@ gameManager.level = new Level(0);
 
 window.addEventListener("buttonClicked",(e)=> startLevel(e), false);
 
+
+//Level manager
+
 function startLevel(e: Event){
     var event = e as CustomEvent;
     gameManager.slowMo = 1;

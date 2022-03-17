@@ -1,6 +1,9 @@
-import { Object3D,Vector3 } from "three";
-import { Body } from "cannon-es"; 
+import { Object3D, Vector3 } from "three";
+import { Body } from "cannon-es";
 import gameManager from "./gameManager";
+
+
+//Interface for Cannon.js + Three.js
 
 export class ThreeBody {
 
@@ -9,19 +12,20 @@ export class ThreeBody {
     trigger: boolean = false;
     constraints: Vector3 = new Vector3();
 
-    public constructor(body: Body,object: Object3D){
+    public constructor(body: Body, object: Object3D) {
         this.body = body;
         this.object = object;
     }
 
-    addToWorld(){
+    addToWorld() {
         gameManager.world.addBody(this.body);
         gameManager.physicsBodies.push(this);
     }
 
-    removeFromWorld(){
+    removeFromWorld() {
         gameManager.world.removeBody(this.body);
-        gameManager.physicsBodies.splice(gameManager.physicsBodies.indexOf(this),1)
+        gameManager.physicsBodies.splice(gameManager.physicsBodies.indexOf(this), 1)
     }
+    
 
 }

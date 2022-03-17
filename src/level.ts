@@ -25,7 +25,7 @@ class Level {
     public state: number = 0;
     scoreGoal: number = 20;
     
-    public constructor( levelId: number=1,levelColor: Color = new Color(0xAB4FAF) ) {
+public constructor( levelId: number=1,levelColor: Color = new Color(0xAB4FAF) ) {
     
     this.player = new Player(); 
     this.difficulty = levelId;
@@ -50,25 +50,22 @@ SetupLights(){
 
 SetupScenery(){
 
-
     gameManager.scene.fog = new FogExp2(0xf57b00,.0125);
-
     const cube = new Mesh( new BoxGeometry( 1, 1, 1 ), new MeshStandardMaterial( {color: 0x1C329B} ) );
     cube.position.z += 10
     cube.scale.set(10,1,1000)
     gameManager.scene.add( cube );
-
     this.floor = tools.boxToBody(cube,{mass:0});
     this.floor.body.addShape( this.floor.body.shapes[0]) 
     this.floor.body.addShape( this.floor.body.shapes[0]) 
-
-
     this.floor.addToWorld();
     
 }
 
 Start(difficulty: number= 1){
-    
+    //Start level generation
+    //Difficulty is time between obstacle creation
+
     this.levelId = difficulty;
     if(this.levelId == 4){
         this.difficulty = 1;
@@ -107,10 +104,10 @@ spawner(){
     
 }
 
-//rewrite disgusting code
+
 createObstacle(){
 
-   
+   //Obstacle generation
     const size = MathUtils.randInt(2,MathUtils.clamp(3+this.difficulty,5,5)) 
     let temp = new Mesh();
 
@@ -123,20 +120,28 @@ createObstacle(){
     
     let rand = MathUtils.randInt(0,3) ;
 
-    if(rand == 0){
-        temp.position.set(MathUtils.randFloat(0,5-(size/2)),1,150)
-    }
-    else if(rand == 1){
-        temp.position.set(-MathUtils.randFloat(0,5-(size/2)),1,150)
+    switch (rand) {
+        case 0:
+            temp.position.set(MathUtils.randFloat(0,5-(size/2)),1,150)
+
+            break;
+        case 1:
+            temp.position.set(-MathUtils.randFloat(0,5-(size/2)),1,150)
+
+            break;
+        case 2:
+            temp.position.set(5-(size/2),1,150)
+
+            break;
+        case 3:
+            temp.position.set(-(5-(size/2)),1,150)
+
+            break;
+    
+        default:
+            break;
     }
 
-    else if(rand == 2){
-        temp.position.set(5-(size/2),1,150)
-    }
-
-    else if(rand == 3){
-        temp.position.set(-(5-(size/2)),1,150)
-    }
 
     gameManager.scene.add(temp)
 
@@ -146,21 +151,18 @@ createObstacle(){
     body.position.copy(new Vec3(temp.position.x,temp.position.y,temp.position.z)) 
     const obstacleTB = new ThreeBody(body,temp)
     var crashed = false;
+
+
+    //Collision Handler
     obstacleTB.body.addEventListener("collide", (e: any) => {
         if(e.body.id == -1){
-
             if(this.state != 0 && !crashed) {
                 crashed= true;
                 if( this.state == 1){
-
                     this.gameOver()
                 }
-            }
-           
-         
+            }        
         }
-        
-
     });
 
     obstacleTB.addToWorld()        
