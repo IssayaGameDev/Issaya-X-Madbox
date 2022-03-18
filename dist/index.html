@@ -203,8 +203,7 @@
           <div>
            <h1 id="issaya">X ISSAYA</h1>
         </div>
-        </div>
-      
+        </div>  
         <div id="levelSelect">
           <h2 id="level1" onclick="startLevel(1)">.Level I</h2>
           <h2 id="level2" onclick="startLevel(2)">.Level II</h2>
@@ -212,30 +211,17 @@
           <h2 id="level4" onclick="startLevel(4)">.Infinite</h2>
           <h1 id="highScore">High Score: 0</h1>
       </div>
-      </div>
-      
+      </div>  
         <h2 id="score">Score:</h2>
-  
-     
-  
       <div id="gameOver">
         <h1 id="goText">GameOver</h1>
         <h2 id="hs">Best:</h2>
-
         <h2 id="restart" onclick="startLevel(0)" >Restart</h2>
         <h2 id="backToMenu" onclick="startLevel(-1)" >Menu</h2>
-  
       </div>
-
     </div>
-
-   
-
-
   </body>
   <script>
-
-
     function startLevel(level) {
      var event = new CustomEvent(('buttonClicked'),{ detail : level})
      window.dispatchEvent(event);
